@@ -1,0 +1,379 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dave Charm Bulaquena</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://use.fontawesome.com/3c19bc44f2.js"></script>
+    <script src="https://use.fontawesome.com/ae122ea3f7.js"></script>
+</head>
+
+
+<body>
+    <header>
+        <div class="header">
+            <div class="nav">
+                <div class="logo-container">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'Images/logo.png' %}" class="logo">
+                    </a>
+                </div>
+                <div class="nav-li col-2">
+                    <ul class="clear-fix">
+                        {% block nav %}
+                        <li>
+                            <a href="#about" class="active">about</a>
+
+                        </li>
+                        <li>
+                            <a href="#project">projects</a>
+
+                        </li>
+                        <li>
+                            <a href="#cont">contact</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'blog:all_blogs' %}">blogs</a>
+                        </li>
+                        {% endblock nav %}
+                    </ul>
+                </div>
+                <div class="drop_down close">
+                    <div class="nav-burger close">
+                        <i id="burg" class="fa fa-times"></i>
+                    </div>
+                    <ul>
+                        {% block nav_drop %}
+                        <li>
+                            <a href="#about" class="active">about</a>
+
+                        </li>
+                        <li>
+                            <a href="#project">projects</a>
+
+                        </li>
+                        <li>
+                            <a href="#cont">contact</a>
+                        </li>
+                        <li>
+                            <a href="{%  url 'blog:all_blogs' %}">blogs</a>
+                        </li>
+                        {% endblock nav_drop %}
+                    </ul>
+                </div>
+
+                <div class="nav-burger">
+                    <i id="burg" class="fa fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="upper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,160L24,144C48,128,96,96,144,69.3C192,43,240,21,288,58.7C336,96,384,192,432,192C480,192,528,96,576,58.7C624,21,672,43,720,53.3C768,64,816,64,864,58.7C912,53,960,43,1008,32C1056,21,1104,11,1152,26.7C1200,43,1248,85,1296,96C1344,107,1392,85,1416,74.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path></svg>
+        </div> -->
+        <!-- <div class="bot">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,160L24,144C48,128,96,96,144,69.3C192,43,240,21,288,58.7C336,96,384,192,432,192C480,192,528,96,576,58.7C624,21,672,43,720,53.3C768,64,816,64,864,58.7C912,53,960,43,1008,32C1056,21,1104,11,1152,26.7C1200,43,1248,85,1296,96C1344,107,1392,85,1416,74.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path></svg>
+        </div> -->
+        <div class="container">
+            <div class="hero">
+                <div class="hero-item col-2 hero1">
+                    <div class="con">
+                        <div class="hero-text-container">
+                            <div>
+                                <!-- Hello, I am Dave Charm -->
+                                {% block name %}
+                                <h1 class="hero-text"></h1>
+                                {% endblock name %} {% block hero %}
+                                <h2 class="sub-text">Mobile &amp; Web Developer</h2>
+                                {% endblock hero %} {% block but %}
+                                <div class="con">
+                                    <div class="container-buttons">
+                                        <a href="#cont" class="btn btn-primary">Hire me</a>
+                                        <a href="#sk" class="btn btn-ghost">Skills</a>
+                                    </div>
+                                </div>
+                                {% endblock but %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-item col-2 hero-img">
+                    <div class="con">
+                        <img src="{% static '/Images/profile.png' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {%block sections%}
+    <section id="project" class="projects">
+        <div class="title">
+
+            <div class="title-container">
+                <h1 class="sec-title">Projects</h1>
+            </div>
+        </div>
+
+        {% for proj in project reversed %}
+        <div class="col-3">
+            <div class="card-inner">
+                <div class="container-project">
+                    <div>
+                        <img src="{{ proj.image.url }}">
+                        <div class="caption">
+                            <h1>{{ proj.title }}</h1>
+                            <p class="message">
+                                {{ proj.description }} {% if proj.url %}
+                                <a href="{{ proj.url }}">click here to go to github repository</a> {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- <div class="col-3">
+            <div class="card-inner">
+                <div class="container-project">
+                    <div>
+                        <img src="{{ MEDIA_URL }}'geari">
+                        <div class="caption">
+                            <h1>Gear-Up</h1>
+                            <p class="message">Gear Up is a web app that allows automotive shops tp automate reservation and the selling of mechanical parts and autos in the market. it has a feature of creating an account for users to be able to have reservation and have
+                                a dashboard for checking out items. Home Page of users have a carousel of items such as cars and parts for sale. Gear Up also comes with an admin page where the admin can see reservations and orders from the users.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card-inner">
+                <div class="container-project">
+                    <div>
+                        <img src="./portfoliopic/travelapp.png">
+                        <div class="caption">
+                            <h1>Flutter Travel App UI</h1>
+                            <p class="message">Travel App UI that is made with flutter. The design achieves the most efficient user experience and user interface for the users. It has the Travel Destination Module as well as the activities on travel with prices. You can
+                                also browse hotels nearby.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card-inner">
+                <div class="container-project">
+                    <div>
+                        <img src="./portfoliopic/spaceinvader.png">
+                        <div class="caption">
+                            <h1>PyGame Space Invader</h1>
+                            <p class="message">A remake of the classic game space invader. Written in python. It is one of the retro game that the old generation has been hooked up to. Improved graphics and increasing speed and numbers of enemy on the long run of the game.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card-inner">
+                <div class="container-project">
+                    <div>
+                        <img src="./portfoliopic/snake.png">
+                        <div class="caption">
+                            <h1>Pygame Snake</h1>
+                            <p class="message">A remake of the classic game snake. Written in python. Game mechanics is to make the fead eat food and not to bump into itself or the border-box. Increasing speed according to your score. Play Until You Beat Your High Score.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card-inner">
+                <div class="container-project">
+                    <div>
+                        <img src="./portfoliopic/calculator.png">
+                        <div class="caption">
+                            <h1>Flutter Simple Calculator</h1>
+                            <p class="message">
+                                a simple android calculator application with minimalistic UI and Function. Made with Flutter. Can do basic arithmetic computation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="container-flex">
+                <div class="color-container container-f">
+                    <div class="box">
+                        <div class="in-box">
+                            <div class="inner-box box-f">
+                            </div>
+                            <div class="inner-box box-s">
+                                <div class="inner-box box-t">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="color-container gray">
+                    <div class="about-text-container">
+                        <div class="container-title">
+                            <h2 class="about-title">About me</h2>
+                        </div>
+                        <div class="about-par">
+                            <p>
+                                I am Dave Charm B. Bulaquena, a mobile and web developer. I am 18 years old and currently studying at PHINMA-University of Pangasinan taking a course of Bachelor of Science and Technology in Information and Technology major in Programming. I am passionate
+                                towards technology and much fascinated on what it can do. For me technology is a tool in which like minded people can express their thoughts and creativity moreover people like me aim to use technology to solve real world
+                                problems and help people provide a feasible solution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-contact" style = "background-image: linear-gradient(rgba(73, 73, 72, 0.7), rgba(73, 73, 72, 0.5)),url('{% static 'Images/contactbg2.jpg' %}');">
+        <div class="contact-container">
+            <div class="contact-text">
+                <h2 id="cont">GET IN TOUCH</h2>
+            </div>
+            <div class="contact-box">
+                <div class="box-1">
+                    <div>
+                        <div class="head">
+                            <div class="font-border">
+                                <i class="fa fa-map-marker pin"></i>
+                            </div>
+                            <div class="desc">
+                                Address
+                            </div>
+                        </div>
+                        <div class="desc-text">
+                            #452 Talospatang, Malasiqui, Pangasinan
+                        </div>
+                    </div>
+                    <div>
+                        <div class="head">
+                            <div class="font-border">
+                                <i class="fa fa-phone pin"></i>
+                            </div>
+                            <div class="desc">
+                                Phone
+                            </div>
+                        </div>
+                        <div class="desc-text">
+                            +(639)66-144-3368
+                        </div>
+                    </div>
+                    <div>
+                        <div class="head">
+                            <div class="font-border">
+                                <i class="fa fa-envelope pin"></i>
+                            </div>
+                            <div class="desc">
+                                E-mail
+                            </div>
+                        </div>
+                        <div class="desc-text">
+                            daba.bulaquena @up.phinma.edu.ph
+                        </div>
+                    </div>
+                    <div>
+                        <div class="head">
+                            <div class="font-border">
+                                <i class="fa fa-globe pin"></i>
+                            </div>
+                            <div class="desc">
+                                Social Media Accounts
+                            </div>
+                        </div>
+                        <div class="desc-text">
+                            <p class="soc-med">
+                                <span class="fb">Facebook</span>:
+                                <a href="https://www.facebook.com/IAm.FuturePhilGrammer">Dave Charm Barboco Bulaquena</a>
+                            </p>
+                            <p class="soc-med"> <span class="lk">Linkedin </span> :<a href="https://www.linkedin.com/in/davecharm">Dave Charm Bulaquena</a></p>
+                            <p class="soc-med"> <span class="ig">Instagram </span> : <a href="https://www.instagram.com/davecharm">@CharmDave</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-1 box-2">
+                    <form action="https://formspree.io/f/xrgoybek" method="POST">
+                        <h2>Send Me a Message </h2>
+                        <input type="text" name="name" placeholder="Full Name">
+                        <input type="email" name="_replyto" placeholder="E-MAIL">
+                        <input type="text" name="message" placeholder="Your Message">
+                        <input type="submit" value="Send Message!">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="sk" class="skills">
+        <div class="skills-head">
+            <h2 class="skill-title">SKILLS</h2>
+        </div>
+        <div class="container-skills">
+            <div class="card languages">
+                <div class="block-card">
+                    <div class="desc-skill">
+                        <h2>Languages</h2>
+                    </div>
+                    <div class="skill-boxes">
+                        <div class="boxes">Java</div>
+                        <div class="boxes">JavaScript</div>
+                        <div class="boxes">Python</div>
+                        <div class="boxes">Dart</div>
+                        <div class="boxes">Kotlin</div>
+                        <div class="boxes">C++</div>
+                        <div class="boxes">PHP</div>
+                    </div>
+                </div>
+                <img src="{% static 'Images/languages.jpg' %}" alt="">
+            </div>
+            <div class="card frameworks">
+                <div class="block-card">
+                    <div class="desc-skill">
+                        <h2>Frameworks</h2>
+                    </div>
+                    <div class="skill-boxes">
+                        <div class="boxes">Bootstrap</div>
+                        <div class="boxes">Django</div>
+                        <div class="boxes">Flutter</div>
+                        <div class="boxes">Android</div>
+                    </div>
+                </div>
+                <img src="{% static 'Images/database.png' %}" alt="">
+            </div>
+            <div class="card database">
+                <div class="block-card">
+                    <div class="desc-skill">
+                        <h2>Database</h2>
+                    </div>
+                    <div class="skill-boxes">
+                        <div class="boxes">SQL</div>
+                        <div class="boxes">FireBase</div>
+                        <div class="boxes">Google Cloud</div>
+                    </div>
+                </div>
+                <img src="{% static 'Images/frameworks.jpg' %}" alt="">
+            </div>
+        </div>
+    </section>
+    {% endblock sections %}
+
+</body>
+
+
+<script src="{% static 'js/app.js' %}"></script>
+
+</html>

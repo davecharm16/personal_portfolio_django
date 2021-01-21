@@ -1,0 +1,73 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+{% extends 'portfolio/index.html' %} {% block nav %}
+<li>
+    <a href="{% url 'home' %}#about" class="active nav-link" id = "shet">about</a>
+
+</li>
+<li>
+    <a href="{% url 'home' %}#project" class="nav-link">projects</a>
+</li>
+<li>
+    <a href="{% url 'home' %}#cont" class="nav-link">contact</a>
+</li>
+<li>
+    <a href="" class="nav-link">blogs</a>
+</li>
+{% endblock nav %} {% block nav_drop %}
+<li>
+    <a href="{% url 'home' %}#about" class="active">about</a>
+
+</li>
+<li>
+    <a href="{% url 'home' %}#project">projects</a>
+
+</li>
+<li>
+    <a href="{% url 'home' %}#cont">contact</a>
+</li>
+<li>
+    <a href="" class="nav-link">blogs</a>
+</li>
+{% endblock nav_drop %} 
+{% block name %}
+<h1 class="hero-text" style="display:none;"></h1>
+ {% endblock name %} 
+{% block hero %}
+<h2 class="sub-text">Welcome to my Blogs</h2>
+{% endblock hero %} 
+{% block but %} 
+{% endblock but %}
+
+{% block sections %}
+
+
+<section class="blog">
+    <div class="title">
+        <div class="title-container">
+            <h1 class="blog-sec-title display-1 text-dark" i>Tech Blogs</h1>
+        </div>
+    </div>
+    <div class="container-fluid dark">
+        <div class="row">
+                <div class ="col">
+                    <h1 class="display-5 text-dark" style="text-align:center;">Dave Charm has written {{ blog_num }} blog{{ blog_num|pluralize }}</h1>
+                </div>
+        </div>
+     </div>
+     <div class="container-fluid">
+     {% for blog in blogs %}
+            <div class="row">
+                <div class="col"  style="color:black;">
+                    <div class = "blog-title">
+                        <a href = " {% url 'blog:details' blog.id %} "><h2 style = "color:#4287f5 ;text-align:center;" class="display-6">{{ blog.title }}</h2></a>
+                    </div>
+                    <div class="blog-date" style = "color:var(--main-color); font-size:1.5rem;">{{ blog.date }}</div>
+                    <div class = "blog-lead lead" style="color:var(--main-color);">
+                       {{ blog.content|striptags|truncatechars:250 }}
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+</section>
+{% endblock %} 
